@@ -22,37 +22,36 @@ namespace TicTacToeServer
         {
             stream = client.GetStream();
 
-            try
-            {
-                while (true)
-                {
-                    byte[] data = new byte[256];
-                    int bytes = stream.Read(data, 0, data.Length);
-                    Console.WriteLine(Encoding.Unicode.GetString(data, 0, bytes));
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Client disconnected");
-                stream.Close();
-            }
+            //try
+            //{
+            //    while (true)
+            //    {
+            //        byte[] data = new byte[256];
+            //        int bytes = stream.Read(data, 0, data.Length);
+            //        Console.WriteLine(Encoding.Unicode.GetString(data, 0, bytes));
+            //    }
+            //}
+            //catch
+            //{
+            //    Console.WriteLine("Client disconnected");
+            //    stream.Close();
+            //}
         }
 
         public char GetResponse()
         {
-            string message = "Enter cell number: ";
-            byte[] data = Encoding.Unicode.GetBytes(message);
-            stream.Write(data, 0, data.Length);
+            SendInformation("Enter cell number: ");
 
-            data = new byte[64];
+            byte[] data = new byte[64];
             int bytes = stream.Read(data, 0, data.Length);
 
             return char.Parse(Encoding.Unicode.GetString(data, 0, bytes));
         }
 
-        public void SendInformation()
+        public void SendInformation(string message)
         {
-
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            stream.Write(data, 0, data.Length);
         }
     }
 }

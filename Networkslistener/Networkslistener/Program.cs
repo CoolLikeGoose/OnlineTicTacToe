@@ -44,6 +44,8 @@ namespace TicTacToeServer
                 listhenThread = new Thread(new ThreadStart(cli2.Process));
                 listhenThread.Start();
                 Console.WriteLine(client.Client.RemoteEndPoint.ToString());
+
+                currentPlayer = cli1;
                 //for (int i = 0; i < 2; i++)
                 //{
                 //    client = listener.AcceptTcpClient();

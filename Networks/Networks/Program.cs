@@ -28,11 +28,18 @@ namespace Networks
 
                 while (true)
                 {
+                    while (!stream.DataAvailable)
+                    {
+                        
+                    }
+                    byte[] data = new byte[64];
+                    int bytes = stream.Read(data, 0, data.Length);
+                    Console.WriteLine(Encoding.Unicode.GetString(data, 0, bytes));
+
                     ConsoleKeyInfo key = Console.ReadKey();
-                    byte[] data = Encoding.Unicode.GetBytes(key.KeyChar.ToString());
+                    data = Encoding.Unicode.GetBytes(key.KeyChar.ToString());
                     //Console.Clear();
                     stream.Write(data, 0, data.Length);
-                    Console.WriteLine("Chlen");
                 }
             }
             catch (Exception ex)
