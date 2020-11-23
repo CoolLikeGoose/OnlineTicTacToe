@@ -19,7 +19,7 @@ namespace Networks
             TcpClient client = new TcpClient();
             try
             {
-                Console.WriteLine("SuukaBlyat");
+                Console.WriteLine("App started");
 
                 client.Connect(host, port);
                 
@@ -34,9 +34,6 @@ namespace Networks
                     stream.Write(data, 0, data.Length);
                     Console.WriteLine("Chlen");
                 }
-
-                client.Close();
-                stream.Close();
             }
             catch (Exception ex)
             {
