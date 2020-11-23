@@ -15,7 +15,7 @@ namespace TicTacToeServer
         private static string currentPlayer = "Player 1";
         private static bool drawFlag = false;
 
-        static void Main(string[] args)
+        static void MainA(string[] args)
         {
             while (true)
             {

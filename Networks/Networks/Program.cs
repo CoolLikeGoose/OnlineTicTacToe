@@ -11,7 +11,7 @@ namespace Networks
         static string userName;
         private const string host = "192.168.1.69";
         private const int port = 8888;
-        static TcpClient client;
+        //static TcpClient client;
         static NetworkStream stream;
 
         static void Main(string[] args)
@@ -19,15 +19,20 @@ namespace Networks
             TcpClient client = new TcpClient();
             try
             {
-                client.Connect("192.168.1.69", 8888);
+                Console.WriteLine("SuukaBlyat");
+
+                client.Connect(host, port);
+                
+                Console.WriteLine("Connected to server");
                 NetworkStream stream = client.GetStream();
 
                 while (true)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     byte[] data = Encoding.Unicode.GetBytes(key.KeyChar.ToString());
-                    Console.Clear();
+                    //Console.Clear();
                     stream.Write(data, 0, data.Length);
+                    Console.WriteLine("Chlen");
                 }
 
                 client.Close();
@@ -36,6 +41,7 @@ namespace Networks
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.ReadLine();
             }
         }
 
@@ -102,23 +108,23 @@ namespace Networks
                 {
                     Console.WriteLine("Connection lost");
                     Console.ReadLine();
-                    Disconnect();
+                    //Disconnect();
                 }
             }
         }
 
-        private static void Disconnect()
-        {
-            if (stream != null)
-            {
-                stream.Close();
-            }
-            if (client != null)
-            {
-                client.Close();
-            }
+        //private static void Disconnect()
+        //{
+        //    if (stream != null)
+        //    {
+        //        stream.Close();
+        //    }
+        //    if (client != null)
+        //    {
+        //        client.Close();
+        //    }
 
-            Environment.Exit(0);
-        }
+        //    Environment.Exit(0);
+        //}
     }
 }

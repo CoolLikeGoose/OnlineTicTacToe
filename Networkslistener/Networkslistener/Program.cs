@@ -15,12 +15,13 @@ namespace TicTacToeServer
         {
             try
             {
-                listener = new TcpListener(IPAddress.Parse("192.168.1.69"), 8888);
+                listener = new TcpListener(IPAddress.Any, 8888);
                 listener.Start();
                 Console.WriteLine("Server waiting for the connections");
 
                 while (true)
                 {
+                    
                     client = listener.AcceptTcpClient();
 
                     Thread listhenThread = new Thread(new ThreadStart(Listen));
