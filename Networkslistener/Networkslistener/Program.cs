@@ -78,18 +78,27 @@ namespace TicTacToeServer
             }
         }
 
+        private static void Broadcast(string message)
+        {
+            cli1.SendInformation(message);
+            cli2.SendInformation(message);
+        }
+
         private static void MainCycle()
         {
             do
             {
                 Console.Clear();
-                Console.WriteLine("PLayer 1: X");
-                Console.WriteLine("PLayer 2: O");
-                Console.WriteLine();
-                Console.WriteLine($"{currentPlayer.name}'s turn");
-                Console.WriteLine();
-                ShowBoard();
-                Console.WriteLine();
+                StringBuilder builder = new StringBuilder();
+                builder.Append("PLayer 1: X\n");
+                builder.Append("PLayer 2: O\n");
+                builder.Append($"{currentPlayer.name}'s turn\n");
+                string message = ShowBoard().ToString();
+                builder.Append(message);
+                Console.WriteLine(message);
+                builder.Append("\n");
+
+                Broadcast(builder.ToString());
 
                 Console.Write("Enter cell number: ");
                 //while (true)
@@ -120,7 +129,7 @@ namespace TicTacToeServer
             if (!drawFlag)
             {
                 changePhase();
-                Console.WriteLine($"\n\n\n {currentPlayer} win!");
+                Console.WriteLine($"\n\n\n {currentPlayer.name} win!");
                 changePhase();
             }
             else
@@ -194,17 +203,21 @@ namespace TicTacToeServer
             return true;
         }
 
-        private static void ShowBoard()
+        private static StringBuilder ShowBoard()
         {
-            Console.WriteLine("     |     |      ");
-            Console.WriteLine($"  {map[0]}  |  {map[1]}  |  {map[2]}");
-            Console.WriteLine("_____|_____|_____ ");
-            Console.WriteLine("     |     |      ");
-            Console.WriteLine($"  {map[3]}  |  {map[4]}  |  {map[5]}");
-            Console.WriteLine("_____|_____|_____ ");
-            Console.WriteLine("     |     |      ");
-            Console.WriteLine($"  {map[6]}  |  {map[7]}  |  {map[8]}");
-            Console.WriteLine("     |     |      ");
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append("     |     |      \n");
+            builder.Append($"  {map[0]}  |  {map[1]}  |  {map[2]}\n");
+            builder.Append("_____|_____|_____ \n");
+            builder.Append("     |     |      \n");
+            builder.Append($"  {map[3]}  |  {map[4]}  |  {map[5]}\n");
+            builder.Append("_____|_____|_____ \n");
+            builder.Append("     |     |      \n");
+            builder.Append($"  {map[6]}  |  {map[7]}  |  {map[8]}\n");
+            builder.Append("     |     |      \n");
+
+            return builder;
         }
     }
 }

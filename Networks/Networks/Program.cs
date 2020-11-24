@@ -32,14 +32,19 @@ namespace Networks
                     {
                         
                     }
+
                     byte[] data = new byte[64];
-                    int bytes = stream.Read(data, 0, data.Length);
-                    Console.WriteLine(Encoding.Unicode.GetString(data, 0, bytes));
+                    int bytes = 0;
+                    do
+                    {
+                        bytes = stream.Read(data, 0, data.Length);
+                        Console.Write(Encoding.Unicode.GetString(data, 0, bytes));
+                    } while (stream.DataAvailable);
 
                     ConsoleKeyInfo key = Console.ReadKey();
                     data = Encoding.Unicode.GetBytes(key.KeyChar.ToString());
-                    //Console.Clear();
                     stream.Write(data, 0, data.Length);
+                    Console.Clear();
                 }
             }
             catch (Exception ex)
