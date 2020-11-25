@@ -32,7 +32,7 @@ namespace Networks
                     {
                         
                     }
-
+                    Console.Clear();
                     byte[] data = new byte[64];
                     int bytes = 0;
                     do
@@ -44,7 +44,6 @@ namespace Networks
                     ConsoleKeyInfo key = Console.ReadKey();
                     data = Encoding.Unicode.GetBytes(key.KeyChar.ToString());
                     stream.Write(data, 0, data.Length);
-                    Console.Clear();
                 }
             }
             catch (Exception ex)

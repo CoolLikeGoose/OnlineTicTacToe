@@ -9,6 +9,7 @@ namespace TicTacToeServer
     {
         private TcpClient client;
         private NetworkStream stream;
+        private string lastMessage = "";
 
         public string name;
 
@@ -40,7 +41,7 @@ namespace TicTacToeServer
 
         public char GetResponse()
         {
-            SendInformation("Enter cell number: ");
+            SendInformation($"{lastMessage}\nEnter cell number: ");
 
             byte[] data = new byte[64];
             int bytes = stream.Read(data, 0, data.Length);
@@ -50,6 +51,7 @@ namespace TicTacToeServer
 
         public void SendInformation(string message)
         {
+            lastMessage = message;
             byte[] data = Encoding.Unicode.GetBytes(message);
             stream.Write(data, 0, data.Length);
         }
